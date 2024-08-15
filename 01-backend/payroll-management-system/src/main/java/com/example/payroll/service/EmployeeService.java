@@ -56,13 +56,13 @@ public class EmployeeService {
     }
 
     public EmployeeDTO fetchEmployeeById(Long id) {
-        Optional<Employee> existingEmployee = employeeRepository.findById(id);
-        return existingEmployee.map(EmployeeMapper::toDTO).orElse(null);
+        Optional<Employee> employee = employeeRepository.findById(id);
+        return employee.map(EmployeeMapper::toDTO).orElse(null);
     }
 
     public List<EmployeeDTO> fetchAllEmployees() {
-        List<Employee> existingEmployees = employeeRepository.findAll();
-        return existingEmployees.stream()
+        List<Employee> employee = employeeRepository.findAll();
+        return employee.stream()
                 .map(EmployeeMapper::toDTO)
                 .collect(Collectors.toList());
     }
