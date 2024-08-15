@@ -35,10 +35,10 @@ public class EmployeeController {
     }
 
     @PutMapping("/employee/id/{id}")
-    public ResponseEntity<Boolean> editEmployee(
+    public ResponseEntity<Boolean> editEmployeeById(
             @PathVariable("id") Long id,
             @RequestBody EmployeeDTO employeeDTO) {
-        boolean success = employeeService.updateEmployee(id, employeeDTO);
+        boolean success = employeeService.updateEmployeeById(id, employeeDTO);
         HttpStatus status = success ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR;
         return new ResponseEntity<>(success, status);
     }
@@ -52,13 +52,13 @@ public class EmployeeController {
 
     @GetMapping("/employee/id/{id}")
     public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable("id") Long id) {
-        EmployeeDTO employeeDTO = employeeService.getEmployeeById(id);
+        EmployeeDTO employeeDTO = employeeService.fetchEmployeeById(id);
         return new ResponseEntity<>(employeeDTO, HttpStatus.OK);
     }
 
     @GetMapping("/employees")
     public ResponseEntity<List<EmployeeDTO>> getEmployees() {
-        List<EmployeeDTO> employeeDTOs = employeeService.getAllEmployees();
+        List<EmployeeDTO> employeeDTOs = employeeService.fetchAllEmployees();
         return new ResponseEntity<>(employeeDTOs, HttpStatus.OK);
     }
 }

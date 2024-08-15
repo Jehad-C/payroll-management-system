@@ -34,7 +34,7 @@ public class EmployeeService {
     }
 
     @Transactional
-    public boolean updateEmployee(Long id, EmployeeDTO employeeDTO) {
+    public boolean updateEmployeeById(Long id, EmployeeDTO employeeDTO) {
         try {
             Employee employee = EmployeeMapper.toEntity(employeeDTO);
             employee.setId(id);
@@ -55,12 +55,12 @@ public class EmployeeService {
         }
     }
 
-    public EmployeeDTO getEmployeeById(Long id) {
+    public EmployeeDTO fetchEmployeeById(Long id) {
         Optional<Employee> existingEmployee = employeeRepository.findById(id);
         return existingEmployee.map(EmployeeMapper::toDTO).orElse(null);
     }
 
-    public List<EmployeeDTO> getAllEmployees() {
+    public List<EmployeeDTO> fetchAllEmployees() {
         List<Employee> existingEmployees = employeeRepository.findAll();
         return existingEmployees.stream()
                 .map(EmployeeMapper::toDTO)
