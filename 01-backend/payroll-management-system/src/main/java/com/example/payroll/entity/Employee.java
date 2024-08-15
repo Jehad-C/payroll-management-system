@@ -7,14 +7,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "employee_info")
-@Data
+@Getter
+@Setter
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,14 +26,11 @@ public class Employee {
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "middle_name")
-    private String middleName;
-
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "dob")
-    private Date dob;
+    @Column(name = "date_of_birth")
+    private LocalDate dateOfBirth;
 
     @Column(name = "gender")
     private String gender;
@@ -39,17 +38,11 @@ public class Employee {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "personal_phone")
-    private String personalPhone;
-
-    @Column(name = "home_phone")
-    private String homePhone;
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
     @Column(name = "address")
     private String address;
-
-    @Column(name = "postal_code")
-    private String postalCode;
 
     @Column(name = "job_title")
     private String jobTitle;
@@ -57,11 +50,11 @@ public class Employee {
     @Column(name = "basic_salary")
     private BigDecimal basicSalary;
 
-    @Column(name = "date_hired")
-    private Date dateHired;
+    @Column(name = "hire_date")
+    private LocalDate hireDate;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "employment_status")
+    private String employmentStatus;
 
     @Column(name = "image")
     private byte[] image;

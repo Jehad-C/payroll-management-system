@@ -7,19 +7,16 @@ public class EmployeeMapper {
     public static Employee toEntity(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
         employee.setFirstName(employeeDTO.getFirstName());
-        employee.setMiddleName(employeeDTO.getMiddleName());
         employee.setLastName(employeeDTO.getLastName());
-        employee.setDob(employeeDTO.getDob());
+        employee.setDateOfBirth(employeeDTO.getDateOfBirth());
         employee.setGender(employeeDTO.getGender());
         employee.setEmail(employeeDTO.getEmail());
-        employee.setPersonalPhone(employeeDTO.getPersonalPhone());
-        employee.setHomePhone(employeeDTO.getHomePhone());
+        employee.setPhoneNumber(employeeDTO.getPhoneNumber());
         employee.setAddress(employeeDTO.getAddress());
-        employee.setPostalCode(employeeDTO.getPostalCode());
         employee.setJobTitle(employeeDTO.getJobTitle());
         employee.setBasicSalary(employeeDTO.getBasicSalary());
-        employee.setDateHired(employeeDTO.getDateHired());
-        employee.setStatus(employeeDTO.getStatus());
+        employee.setHireDate(employeeDTO.getHireDate());
+        employee.setEmploymentStatus(employeeDTO.getEmploymentStatus());
         employee.setImage(employeeDTO.getImage());
         return employee;
     }
@@ -28,19 +25,16 @@ public class EmployeeMapper {
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setId(employee.getId());
         employeeDTO.setFirstName(employee.getFirstName());
-        employeeDTO.setMiddleName(employee.getMiddleName());
         employeeDTO.setLastName(employee.getLastName());
-        employeeDTO.setDob(employee.getDob());
+        employeeDTO.setDateOfBirth(employee.getDateOfBirth());
         employeeDTO.setGender(employee.getGender());
         employeeDTO.setEmail(employee.getEmail());
-        employeeDTO.setPersonalPhone(employee.getPersonalPhone());
-        employeeDTO.setHomePhone(employee.getHomePhone());
+        employeeDTO.setPhoneNumber(employee.getPhoneNumber());
         employeeDTO.setAddress(employee.getAddress());
-        employeeDTO.setPostalCode(employee.getPostalCode());
         employeeDTO.setJobTitle(employee.getJobTitle());
         employeeDTO.setBasicSalary(employee.getBasicSalary());
-        employeeDTO.setDateHired(employee.getDateHired());
-        employeeDTO.setStatus(employee.getStatus());
+        employeeDTO.setHireDate(employee.getHireDate());
+        employeeDTO.setEmploymentStatus(employee.getEmploymentStatus());
         employeeDTO.setImage(employee.getImage());
         return employeeDTO;
     }

@@ -3,24 +3,21 @@ package com.example.payroll.dto;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class EmployeeDTO {
     private Long id;
     private String firstName;
-    private String middleName;
     private String lastName;
-    private Date dob;
+    private LocalDate dateOfBirth;
     private String gender;
     private String email;
-    private String personalPhone;
-    private String homePhone;
+    private String phoneNumber;
     private String address;
-    private String postalCode;
     private String jobTitle;
     private BigDecimal basicSalary;
-    private Date dateHired;
-    private String status;
+    private LocalDate hireDate;
+    private String employmentStatus;
     private byte[] image;
 }
