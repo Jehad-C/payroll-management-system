@@ -4,6 +4,7 @@ import com.example.payroll.converter.TimeInOutMapper;
 import com.example.payroll.dao.TimeInOutRepository;
 import com.example.payroll.dto.TimeInOutDTO;
 import com.example.payroll.entity.TimeInOut;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,16 +20,19 @@ public class TimeInOutService {
         this.timeInOutRepository = timeInOutRepository;
     }
 
-    public List<TimeInOutDTO> getTimeIns(Long id) {
-        List<TimeInOut> timeIns = timeInOutRepository.findByEmployeeIdAndEntryType(id, "IN");
-        return timeIns.stream()
-                .map(TimeInOutMapper::toDTO)
-                .collect(Collectors.toList());
+    public boolean recordTimeInOut(TimeInOutDTO timeInOutDTO) {
+        try {
+            TimeInOut timeInOut = TimeInOutMapper.toEntity(timeInOutDTO);
+            timeInOutRepository.save(timeInOut);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-    public List<TimeInOutDTO> getTimeOuts(Long id) {
-        List<TimeInOut> timeOuts = timeInOutRepository.findByEmployeeIdAndEntryType(id, "OUT");
-        return timeOuts.stream()
+    public List<TimeInOutDTO> getTimeInOuts(Long id, String entryType) {
+        List<TimeInOut> timeInOuts = timeInOutRepository.findByEmployeeIdAndEntryType(id, entryType);
+        return timeInOuts.stream()
                 .map(TimeInOutMapper::toDTO)
                 .collect(Collectors.toList());
     }
