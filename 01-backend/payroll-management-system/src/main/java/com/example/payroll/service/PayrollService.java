@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.List;
@@ -31,7 +31,7 @@ public class PayrollService {
         PayrollSummaryDTO payrollSummaryDTO = new PayrollSummaryDTO();
         BigDecimal basicSalary = fetchBasicSalary(employeeId);
         BigDecimal totalHoursWorked = calculateTotalHoursWorked(employeeId, payrollDTO);
-        BigDecimal netPay = calculateNetPay(payrollSummaryDTO);
+        BigDecimal netPay = calculateNetPay(basicSalary, totalHoursWorked);
 
         payrollSummaryDTO.setBasicSalary(basicSalary);
         payrollSummaryDTO.setTotalHoursWorked(totalHoursWorked);
@@ -45,23 +45,23 @@ public class PayrollService {
     }
 
     public BigDecimal calculateTotalHoursWorked(Long employeeId, PayrollDTO payrollDTO) {
-        LocalDate startDate = LocalDate.parse(payrollDTO.getStartDate());
-        LocalDate endDate = LocalDate.parse(payrollDTO.getEndDate());
+        LocalDateTime startDate = payrollDTO.getStartDate();
+        LocalDateTime endDate = payrollDTO.getEndDate();
         long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
         List<TimeInOutDTO> timeIns = timeInOutService.getTimeInOuts(employeeId, "IN");
         List<TimeInOutDTO> timeOuts = timeInOutService.getTimeInOuts(employeeId, "OUT");
         BigDecimal totalHoursWorked = BigDecimal.ZERO;
 
         for (int i = 0; i < daysBetween; i++) {
-            LocalDate currentDate = startDate.plusDays(i);
-            Optional<LocalDate> timeIn = timeIns.stream()
+            LocalDateTime currentDate = startDate.plusDays(i);
+            Optional<LocalDateTime> timeIn = timeIns.stream()
                     .map(TimeInOutDTO::getEntryTime)
-                    .filter(entryTime -> entryTime.equals(currentDate))
+                    .filter(entryTime -> isSameDay(entryTime, currentDate))
                     .findFirst();
 
-            Optional<LocalDate> timeOut = timeOuts.stream()
+            Optional<LocalDateTime> timeOut = timeOuts.stream()
                     .map(TimeInOutDTO::getEntryTime)
-                    .filter(entryTime -> entryTime.equals(currentDate))
+                    .filter(entryTime -> isSameDay(entryTime, currentDate))
                     .max(Comparator.naturalOrder());
 
             if (timeIn.isPresent() && timeOut.isPresent()) {
@@ -73,9 +73,11 @@ public class PayrollService {
         return totalHoursWorked;
     }
 
-    public BigDecimal calculateNetPay(PayrollSummaryDTO payrollSummaryDTO) {
-        BigDecimal basicSalary = payrollSummaryDTO.getBasicSalary();
-        BigDecimal totalHoursWorked = payrollSummaryDTO.getTotalHoursWorked();
+    public boolean isSameDay(LocalDateTime entryTime, LocalDateTime targetDay) {
+        return !entryTime.isBefore(targetDay) && entryTime.isBefore(targetDay.plusDays(1));
+    }
+
+    public BigDecimal calculateNetPay(BigDecimal basicSalary, BigDecimal totalHoursWorked) {
         BigDecimal hourlyRate = basicSalary.divide(BigDecimal.valueOf(8), RoundingMode.HALF_UP);
         return totalHoursWorked.multiply(hourlyRate);
     }
