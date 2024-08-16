@@ -47,7 +47,7 @@ public class Employee {
     @Column(name = "job_title")
     private String jobTitle;
 
-    @Column(name = "basic_salary")
+    @Column(name = "basic_salary", nullable = false)
     private BigDecimal basicSalary;
 
     @Column(name = "hire_date")
