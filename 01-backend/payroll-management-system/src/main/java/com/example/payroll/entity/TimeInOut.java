@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "time_in_out_info")
@@ -33,5 +33,5 @@ public class TimeInOut {
     private String entryType;
 
     @Column(name = "entry_time", nullable = false)
-    private LocalDate entryTime;
+    private LocalDateTime entryTime;
 }

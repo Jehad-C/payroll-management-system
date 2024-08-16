@@ -4,12 +4,11 @@ import com.example.payroll.entity.Employee;
 
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class TimeInOutDTO {
-    private Long id;
     private Employee employee;
     private String entryType;
-    private LocalDate entryTime;
+    private LocalDateTime entryTime;
 }
