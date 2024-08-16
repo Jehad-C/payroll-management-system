@@ -33,8 +33,8 @@ public class PayrollService {
         BigDecimal totalHoursWorked = calculateTotalHoursWorked(employeeId, payrollDTO);
         BigDecimal netPay = calculateNetPay(basicSalary, totalHoursWorked);
 
-        payrollSummaryDTO.setBasicSalary(basicSalary);
-        payrollSummaryDTO.setTotalHoursWorked(totalHoursWorked);
+        payrollSummaryDTO.getEarningDTO().setBasicSalary(basicSalary);
+        payrollSummaryDTO.getEarningDTO().setTotalHoursWorked(totalHoursWorked);
         payrollSummaryDTO.setNetPay(netPay);
         return payrollSummaryDTO;
     }

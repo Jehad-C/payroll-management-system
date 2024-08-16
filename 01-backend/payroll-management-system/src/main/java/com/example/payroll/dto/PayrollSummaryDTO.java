@@ -6,7 +6,8 @@ import java.math.BigDecimal;
 
 @Data
 public class PayrollSummaryDTO {
-    private BigDecimal basicSalary;
-    private BigDecimal totalHoursWorked;
+    private EarningDTO earningDTO;
+    private DeductionDTO deductionDTO;
+    private BigDecimal grossPay;
     private BigDecimal netPay;
 }
