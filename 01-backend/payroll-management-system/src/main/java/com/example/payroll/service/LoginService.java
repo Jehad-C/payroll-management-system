@@ -31,6 +31,6 @@ public class LoginService {
 
     public boolean isPasswordValid(String username, String password) {
         AdminDTO admin = adminService.fetchAdminByUsername(username);
-        return admin.getPassword().equals(PasswordUtil.encryptPassword(password));
+        return PasswordUtil.checkPassword(password, admin.getPassword());
     }
 }
