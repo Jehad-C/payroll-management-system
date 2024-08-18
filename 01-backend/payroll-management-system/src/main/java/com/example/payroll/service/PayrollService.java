@@ -1,5 +1,6 @@
 package com.example.payroll.service;
 
+import com.example.payroll.dto.EarningDTO;
 import com.example.payroll.dto.EmployeeDTO;
 import com.example.payroll.dto.PayrollDTO;
 import com.example.payroll.dto.PayrollSummaryDTO;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
@@ -29,13 +29,13 @@ public class PayrollService {
 
     public PayrollSummaryDTO generatePayroll(Long employeeId, PayrollDTO payrollDTO) {
         PayrollSummaryDTO payrollSummaryDTO = new PayrollSummaryDTO();
-        BigDecimal basicSalary = fetchBasicSalary(employeeId);
-        BigDecimal totalHoursWorked = calculateTotalHoursWorked(employeeId, payrollDTO);
-        BigDecimal netPay = calculateNetPay(basicSalary, totalHoursWorked);
 
-        payrollSummaryDTO.getEarningDTO().setBasicSalary(basicSalary);
-        payrollSummaryDTO.getEarningDTO().setTotalHoursWorked(totalHoursWorked);
+        EarningDTO earningDTO = calculateEarnings(employeeId, payrollDTO);
+        payrollSummaryDTO.setEarningDTO(earningDTO);
+
+        BigDecimal netPay = calculateNetPay(earningDTO);
         payrollSummaryDTO.setNetPay(netPay);
+
         return payrollSummaryDTO;
     }
 
@@ -44,7 +44,7 @@ public class PayrollService {
         return employee.getBasicSalary();
     }
 
-    public BigDecimal calculateTotalHoursWorked(Long employeeId, PayrollDTO payrollDTO) {
+    public BigDecimal calculateTotalHoursWorkedWithinPeriod(Long employeeId, PayrollDTO payrollDTO) {
         LocalDateTime startDate = payrollDTO.getStartDate();
         LocalDateTime endDate = payrollDTO.getEndDate();
         long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
@@ -77,8 +77,19 @@ public class PayrollService {
         return !entryTime.isBefore(targetDay) && entryTime.isBefore(targetDay.plusDays(1));
     }
 
-    public BigDecimal calculateNetPay(BigDecimal basicSalary, BigDecimal totalHoursWorked) {
-        BigDecimal hourlyRate = basicSalary.divide(BigDecimal.valueOf(8), RoundingMode.HALF_UP);
-        return totalHoursWorked.multiply(hourlyRate);
+    public EarningDTO calculateEarnings(Long employeeId, PayrollDTO payrollDTO) {
+        EarningDTO earningDTO = new EarningDTO();
+
+        BigDecimal basicSalary = fetchBasicSalary(employeeId);
+        BigDecimal totalHoursWorked = calculateTotalHoursWorkedWithinPeriod(employeeId, payrollDTO);
+
+        earningDTO.setBasicSalary(basicSalary);
+        earningDTO.setTotalHoursWorked(totalHoursWorked);
+
+        return earningDTO;
+    }
+
+    public BigDecimal calculateNetPay(EarningDTO earningDTO) {
+        return earningDTO.getBasicSalary().multiply(earningDTO.getTotalHoursWorked());
     }
 }
