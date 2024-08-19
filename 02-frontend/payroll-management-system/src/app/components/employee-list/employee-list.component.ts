@@ -26,7 +26,7 @@ export class EmployeeListComponent {
     );
   }
 
-  selectEmployee(employeeId: number) {
-    console.log(employeeId);
+  selectEmployee(employeeId: string) {
+    this.employeeListService.navigateToEmployee(employeeId);
   }
 }
