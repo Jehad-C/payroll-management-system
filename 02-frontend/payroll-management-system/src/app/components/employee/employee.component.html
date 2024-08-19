@@ -1,0 +1,71 @@
+<div class="container d-flex justify-content-center min-vh-100">
+    <div class="table-responsive w-100">
+        <table *ngIf="employee; else noData" class="table table-bordered table-striped mt-4">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Attribute</th>
+                    <th scope="col">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">ID</th>
+                    <td>{{ employee.id }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Full Name</th>
+                    <td>{{ employee.firstName }} {{ employee.lastName }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Date of Birth</th>
+                    <td>{{ employee.dateOfBirth }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Gender</th>
+                    <td>{{ employee.gender }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Email</th>
+                    <td>{{ employee.email }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Phone Number</th>
+                    <td>{{ employee.phoneNumber }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Address</th>
+                    <td>{{ employee.address }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Job Title</th>
+                    <td>{{ employee.jobTitle }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Basic Salary</th>
+                    <td>{{ employee.basicSalary }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Hire Date</th>
+                    <td>{{ employee.hireDate }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Employment Status</th>
+                    <td>{{ employee.employmentStatus }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="d-flex justify-content-center mt-4">
+            <button
+                class="btn btn-primary px-3"
+                type="button"
+                (click)="generatePayroll()">
+                Generate payroll
+            </button>
+        </div>
+    </div>
+
+    <ng-template #noData>
+        <p class="text-center text-muted mt-4">No employees found.</p>
+    </ng-template>
+</div>
