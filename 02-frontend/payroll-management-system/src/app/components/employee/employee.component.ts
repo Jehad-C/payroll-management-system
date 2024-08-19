@@ -35,8 +35,4 @@ export class EmployeeComponent {
 
     return;
   }
-
-  generatePayroll() {
-    console.log('Clicked generate payroll button');
-  }
 }
