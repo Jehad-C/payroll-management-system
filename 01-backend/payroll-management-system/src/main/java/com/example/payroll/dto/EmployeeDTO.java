@@ -19,5 +19,6 @@ public class EmployeeDTO {
     private BigDecimal basicSalary;
     private LocalDate hireDate;
     private String employmentStatus;
+    private String department;
     private byte[] image;
 }

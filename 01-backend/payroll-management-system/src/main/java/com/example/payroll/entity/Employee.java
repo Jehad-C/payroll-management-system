@@ -56,6 +56,9 @@ public class Employee {
     @Column(name = "employment_status")
     private String employmentStatus;
 
+    @Column(name = "department")
+    private String department;
+
     @Column(name = "image")
     private byte[] image;
 }

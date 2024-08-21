@@ -17,6 +17,7 @@ public class EmployeeMapper {
         employee.setBasicSalary(employeeDTO.getBasicSalary());
         employee.setHireDate(employeeDTO.getHireDate());
         employee.setEmploymentStatus(employeeDTO.getEmploymentStatus());
+        employee.setDepartment(employeeDTO.getDepartment());
         employee.setImage(employeeDTO.getImage());
         return employee;
     }
@@ -35,6 +36,7 @@ public class EmployeeMapper {
         employeeDTO.setBasicSalary(employee.getBasicSalary());
         employeeDTO.setHireDate(employee.getHireDate());
         employeeDTO.setEmploymentStatus(employee.getEmploymentStatus());
+        employeeDTO.setDepartment(employee.getDepartment());
         employeeDTO.setImage(employee.getImage());
         return employeeDTO;
     }
