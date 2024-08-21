@@ -22,15 +22,14 @@ export class EmployeeComponent {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
     if (id) {
-      return this.employeeService.fetchEmployeeById(id).subscribe(
-        response => {
-          this.employee = response;
+      return this.employeeService.fetchEmployeeById(id).subscribe({
+        next: (data) => {
+          this.employee = data;
         },
-        error => {
+        error: (error) => {
           console.error('Get employee failed', error);
-          
         }
-      );
+      });
     }
 
     return;

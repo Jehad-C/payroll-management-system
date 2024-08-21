@@ -21,13 +21,13 @@ export class LoginComponent {
       password: this.password
     }
 
-    this.loginService.login(credentials).subscribe(
-      response => {
-        console.log('Login successfully', response);
+    this.loginService.login(credentials).subscribe({
+      next: (data) => {
+        console.log('Login successfully', data);
       },
-      error => {
+      error: (error) => {
         console.log('Login failed', error);
       }
-    );
+    });
   }
 }
