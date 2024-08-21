@@ -86,7 +86,6 @@ public class PayrollService {
 
         BigDecimal totalHoursWorked = calculateTotalHoursWorkedWithinPeriod(employeeDTO.getId(), payrollDTO);
         earningDTO.setTotalHoursWorked(totalHoursWorked);
-        earningDTO.setTotalHoursWorked(BigDecimal.valueOf(0));
         earningDTO.setTotalOvertimeWorked(BigDecimal.valueOf(0));
         earningDTO.setTotalHolidayWorked(BigDecimal.valueOf(0));
         earningDTO.setBonuses(BigDecimal.valueOf(0));
