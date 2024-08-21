@@ -1,0 +1,74 @@
+<div class="container d-flex justify-content-center min-vh-100">
+    <div class="table-responsive w-100">
+        <table *ngIf="payroll; else noData" class="table table-bordered table-striped mt-4">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Attribute</th>
+                    <th scope="col">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">ID</th>
+                    <td>{{ "payroll.employeeDTO.id" }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Full Name</th>
+                    <td>{{ "payroll.employeeDTO.firstName" }} {{ "payroll.employeeDTO.lastName" }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Basic Salary</th>
+                    <td>{{ payroll.earningDTO.basicSalary }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Total Hours Worked</th>
+                    <td>{{ payroll.earningDTO.totalHoursWorked }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Total Overtime Worked</th>
+                    <td>{{ payroll.earningDTO.totalOvertimeWorked }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Total Holiday Worked</th>
+                    <td>{{ payroll.earningDTO.totalHolidayWorked }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Bonuses</th>
+                    <td>{{ payroll.earningDTO.bonuses }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">BIR</th>
+                    <td>{{ "payroll.deductionDTO.bir" }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Pag-IBIG</th>
+                    <td>{{ "payroll.deductionDTO.pagibig" }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Philhealth</th>
+                    <td>{{ "payroll.deductionDTO.philhealth" }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">SSS</th>
+                    <td>{{ "payroll.deductionDTO.sss" }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Miscellaneous</th>
+                    <td>{{ "payroll.deductionDTO.miscellaneous" }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Gross Pay</th>
+                    <td>{{ "payroll.grossPay" }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Net Pay</th>
+                    <td>{{ payroll.netPay }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ng-template #noData>
+        <p class="text-center text-muted mt-4">No employees found.</p>
+    </ng-template>
+</div>

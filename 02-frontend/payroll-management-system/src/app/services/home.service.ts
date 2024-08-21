@@ -19,6 +19,17 @@ export class HomeService {
     return this.httpClient.get<any[]>(HomeService.EMPLOYEES_URL);
   }
 
+  navigateToPayroll(employeeId: string, fromDate: string, toDate: string) {
+    const isoFromDate = new Date(fromDate).toISOString();
+    const isoToDate = new Date(toDate).toISOString();
+    const queryParams = {
+      fromDate: isoFromDate,
+      toDate: isoToDate,
+    };
+
+    this.router.navigate(['/payroll/id', employeeId], { queryParams });
+  }
+
   navigateToEmployee(employeeId: string) {
     this.router.navigate(['/employee/id', employeeId]);
   }

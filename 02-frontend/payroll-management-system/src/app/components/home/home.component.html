@@ -31,24 +31,41 @@
     <div class="row w-100 mt-2 align-items-center">
         <div class="col-md-3">
             <div class="form-group d-flex align-items-center">
-                <label for="startDate" class="pe-3 text-nowrap">From</label>
-                <input type="date" id="startDate" name="startDate" class="form-control" required>
+                <label for="fromDate" class="pe-3 text-nowrap">From</label>
+                <input
+                    type="date"
+                    id="fromDate"
+                    name="fromDate"
+                    class="form-control"
+                    [(ngModel)]="fromDate"
+                    required>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group d-flex align-items-center">
-                <label for="startDate" class="pe-3 text-nowrap">To</label>
-                <input type="date" id="endDate1" name="endDate1" class="form-control" required>
+                <label for="toDate" class="pe-3 text-nowrap">To</label>
+                <input
+                    type="date"
+                    id="toDate"
+                    name="toDate"
+                    class="form-control"
+                    [(ngModel)]="toDate"
+                    required>
             </div>
         </div>
         <div class="col-md-2">
-            <button class="btn btn-primary w-100" type="button">Generate Payroll</button>
+            <button
+                class="btn btn-primary w-100"
+                type="button"
+                (click)="onGeneratePayroll()">
+                Generate Payroll
+            </button>
         </div>
         <div class="col-md-3">
             <button
             class="btn btn-primary"
             type="button"
-            (click)="viewEmployee(id)">
+            (click)="onViewEmployee()">
             View Employee Details
         </button>
         </div>
@@ -69,7 +86,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let employee of employees" (click)="selectEmployee(employee.id)">
+                    <tr *ngFor="let employee of employees" (click)="onSelectEmployee(employee.id)">
                         <td>{{ employee.id }}</td>
                         <td>{{ employee.firstName }} {{ employee.lastName }}</td>
                         <td>{{ employee.department }}</td>

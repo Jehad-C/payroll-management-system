@@ -1,17 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { HomeService } from '../../services/home.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
   id: string = '';
   employees: any[] = [];
+  fromDate: string = '';
+  toDate: string = '';
 
   constructor(private homeService: HomeService) { }
 
@@ -26,11 +29,15 @@ export class HomeComponent {
     });
   }
 
-  selectEmployee(id: string) {
+  onSelectEmployee(id: string) {
     this.id = id;
   }
 
-  viewEmployee(employeeId: string) {
-    this.homeService.navigateToEmployee(employeeId);
+  onGeneratePayroll() {
+    this.homeService.navigateToPayroll(this.id, this.fromDate, this.toDate);
+  }
+
+  onViewEmployee() {
+    this.homeService.navigateToEmployee(this.id);
   }
 }
