@@ -32,6 +32,8 @@ public class PayrollService {
         PayrollSummaryDTO payrollSummaryDTO = new PayrollSummaryDTO();
 
         EmployeeDTO employeeDTO = employeeService.fetchEmployeeById(employeeId);
+        payrollSummaryDTO.setEmployeeDTO(employeeDTO);
+
         EarningDTO earningDTO = calculateEarnings(employeeDTO, payrollDTO);
         payrollSummaryDTO.setEarningDTO(earningDTO);
 
